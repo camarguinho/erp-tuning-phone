@@ -1,2 +1,3 @@
-br/com/tuning/phone/Server.class
+br/com/tuning/phone/RestServer.class
 br/com/tuning/phone/Whisky.class
+br/com/tuning/phone/RestClient.class
