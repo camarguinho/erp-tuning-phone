@@ -1,3 +1,8 @@
-/home/camargo/workspace-vertx/vertx-restfull/src/main/java/br/com/tuning/phone/RestServer.java
-/home/camargo/workspace-vertx/vertx-restfull/src/main/java/br/com/tuning/phone/Whisky.java
-/home/camargo/workspace-vertx/vertx-restfull/src/main/java/br/com/tuning/phone/RestClient.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/SpringServerVerticle.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/Product.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/AppServerVerticle.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/ProductService.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/ProductRepository.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/SpringConfiguration.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/AppRunner.java
+/home/camargo/workspace-vertx/erp-tuning-phone/src/main/java/br/com/tuning/phone/RestClient.java

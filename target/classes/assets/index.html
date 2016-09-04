@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Things Collection</title>
+    <title>Controle de produtos</title>
 
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -11,15 +11,13 @@
 <body>
 <div class="container" role="main">
     <div class="jumbotron">
-        <h1>My Things Collection</h1>
-
-        <p>Just an example of simple CRUD application developed using Vert.x and Vertx Web.</p>
+        <h1>Controle de produtos</h1>
     </div>
     <div class="page-header">
-        <h1>My Whiskies</h1>
+        <h1>Produtos</h1>
         <button class="pull-right btn btn-primary product-add" data-action="add" data-toggle="modal"
                 data-target="#productModal">
-            <span class="glyphicon glyphicon-plus"></span> Add a new bottle
+            <span class="glyphicon glyphicon-plus"></span> Adicionar novo
         </button>
         <div class="row">
             <div class="col-md-12">
@@ -27,9 +25,9 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Origin</th>
-                        <th>Actions</th>
+                        <th>Nome</th>
+                        <th>Valor</th>
+                        <th>Ação</th>
                     </tr>
                     </thead>
                     <tbody id="content">
@@ -46,26 +44,30 @@
         initModal();
     });
 
-    function create(name, origin) {
-        $.post("/api/whiskies", JSON.stringify({name: name, origin: origin}), function () {
-            load();
-        }, "json");
-    }
-
-    function remove(id) {
-        $.ajax({
-            method: "DELETE",
-            url: "/api/whiskies/" + id
+    function create(name, value) {
+    	$.ajax({
+            method: "POST",
+            url: "/api/products/",
+            data: JSON.stringify({name: name, value: value})
         }).done(function () {
             load();
         });
     }
 
-    function update(id, name, origin) {
+    function remove(id) {
+        $.ajax({
+            method: "DELETE",
+            url: "/api/products/" + id
+        }).done(function () {
+            load();
+        });
+    }
+
+    function update(id, name) {
         $.ajax({
             method: "PUT",
-            url: "/api/whiskies/" + id,
-            data: JSON.stringify({name: name, origin: origin})
+            url: "/api/products/" + id,
+            data: JSON.stringify({name: name, value: value})
         }).done(function () {
             load();
         });
@@ -73,15 +75,15 @@
 
     function load() {
         $("#content").children().remove();
-        $.getJSON("/api/whiskies", function (data) {
+        $.getJSON("/api/products", function (data) {
             $.each(data, function (key, val) {
-                $("<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.origin + "</td>" +
+                $("<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.value + "</td>" +
                         "<td>" +
                         "<button data-action='edit' class='btn btn-primary btn-sm product-edit' " +
                         "data-toggle='modal' " +
                         "data-target='#productModal' " +
                         "data-name='" + val.name + "' " +
-                        "data-origin='" + val.origin + "' " +
+                        "data-value='" + val.value + "' " +
                         "data-id='" + val.id + "'>" +
                         "<span class='glyphicon glyphicon-pencil'></span>" +
                         "</button>" +
@@ -112,19 +114,19 @@
             productAction.unbind();
             var modal = $(this);
             if (action === "add") {
-                modal.find('.modal-title').text("Add a bottle");
+                modal.find('.modal-title').text("Adicionar novo produto");
                 modal.find('#product-name').val("");
-                modal.find('#product-origin').val("");
+                modal.find('#product-value').val("");
                 productAction.click(function () {
-                    create($("#product-name").val(), $("#product-origin").val());
+                    create($("#product-name").val(), $("#product-value").val());
                     $('#productModal').modal('toggle');
                 });
             } else {
                 modal.find('.modal-title').text("Edit a bottle");
                 modal.find('#product-name').val(button.data("name"));
-                modal.find('#product-origin').val(button.data("origin"));
+                modal.find('#product-value').val(button.data("value"));
                 productAction.click(function () {
-                    update(id, $("#product-name").val(), $("#product-origin").val());
+                    update(id, $("#product-name").val(), $("#product-value").val());
                     $('#productModal').modal('toggle');
                 });
             }
@@ -136,23 +138,24 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                <h4 class="modal-title" id="productModalTitle">Add a bottle</h4>
+                <h4 class="modal-title" id="productModalTitle">Adicionar novo produto</h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="product-name" class="control-label">Name:</label>
+                        <label for="product-name" class="control-label">Nome:</label>
                         <input type="text" class="form-control" id="product-name">
                     </div>
                     <div class="form-group">
-                        <label for="product-origin" class="control-label">Origin:</label>
-                        <input type="text" class="form-control" id="product-origin">
+                        <label for="product-value" class="control-label">Valor:</label>
+                        <input type="text" class="form-control" id="product-value">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" id="productAction" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="productAction" class="btn btn-primary" 
+                data-action="add">Salvar</button>
             </div>
         </div>
     </div>

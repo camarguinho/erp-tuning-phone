@@ -1,3 +1,5 @@
-br/com/tuning/phone/RestServer.class
-br/com/tuning/phone/Whisky.class
+br/com/tuning/phone/ProductRepository.class
+br/com/tuning/phone/Product.class
+br/com/tuning/phone/SpringConfiguration.class
+br/com/tuning/phone/ProductService.class
 br/com/tuning/phone/RestClient.class
