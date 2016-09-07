@@ -42,7 +42,12 @@ public class SpringServerVerticle extends AbstractVerticle{
 	@Override
 	public void start() throws Exception {
 		super.start();
+		new AppServerVerticle(productService);
 		vertx.eventBus().<String>consumer("example.all.products").handler(allProductsHandler(productService));
+	}
+	
+	public ProductService getProductService(){
+		return this.productService;
 	}
 	
 }

@@ -13,21 +13,40 @@ import io.vertx.ext.web.handler.StaticHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class AppServerVerticle extends AbstractVerticle{
 
 	private List<Product> products = new ArrayList<Product>();
 	
-	@Autowired
 	private ProductService productService;
-		
+	
+	public AppServerVerticle(ProductService productService) {
+		this.productService = productService;
+	}
+	
 	@Override
 	public void start(Future<Void> fut) throws Exception {
 		super.start();
 		Router router = Router.router(vertx);
 		setRoutingContext(router);
 		createServer(fut, router);
+		products = productService.getAllProducts();
+	}	
+	
+	private void setRoutingContext(Router router) {
+		router.route("/").handler(routingContext -> {
+			HttpServerResponse response = routingContext.response();
+			response
+			.putHeader("content-type", "text/html")
+			.end("<h1>Bora de Rest!</h1>");
+		});
+		
+		router.route("/assets/*").handler(StaticHandler.create("assets"));
+		router.get("/api/products").handler(this::getAll);
+		router.route("/api/products*").handler(BodyHandler.create());
+		router.post("/api/products").handler(this::addOne);
+		router.get("/api/products/:id").handler(this::getOne);
+		router.put("/api/products/:id").handler(this::updateOne);
+		router.delete("/api/products/:id").handler(this::deleteOne);
 	}
 
 	private void createServer(Future<Void> fut, Router router) {
@@ -46,23 +65,6 @@ public class AppServerVerticle extends AbstractVerticle{
 		);
 	}
 
-	private void setRoutingContext(Router router) {
-		router.route("/").handler(routingContext -> {
-			HttpServerResponse response = routingContext.response();
-			response
-			.putHeader("content-type", "text/html")
-			.end("<h1>Bora de Rest!</h1>");
-		});
-		
-		router.route("/assets/*").handler(StaticHandler.create("assets"));
-		router.get("/api/products").handler(this::getAll);
-		router.route("/api/products*").handler(BodyHandler.create());
-		router.post("/api/products").handler(this::addOne);
-		router.get("/api/products/:id").handler(this::getOne);
-		router.put("/api/products/:id").handler(this::updateOne);
-		router.delete("/api/products/:id").handler(this::deleteOne);
-	}
-
 	private void getAll(RoutingContext routingContext) {
 		routingContext.response()
 		.putHeader("content-type", "application/json; charset=utf-8")
@@ -72,9 +74,8 @@ public class AppServerVerticle extends AbstractVerticle{
 	private void addOne(RoutingContext routingContext) {
 		JsonObject json = routingContext.getBodyAsJson();
 		
-		final Product product = new Product(json.getString("name"), 
+		final Product product = new Product(json.getString("name").toUpperCase(), 
 				new Double(json.getString("value")));
-		
 		productService.saveProduct(product);
 		routingContext.response()
 		.setStatusCode(201)
@@ -104,7 +105,7 @@ public class AppServerVerticle extends AbstractVerticle{
 			if (product == null) {
 				routingContext.response().setStatusCode(404).end();
 			} else {
-				product.setName(json.getString("name"));
+				product.setName(json.getString("name").toUpperCase());
 				product.setValue(new Double(json.getString("value")));
 				routingContext.response()
 				.putHeader("content-type", "application/json; charset=utf-8")

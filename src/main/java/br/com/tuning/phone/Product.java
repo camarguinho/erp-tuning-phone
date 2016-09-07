@@ -1,28 +1,32 @@
 package br.com.tuning.phone;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PRODUCT")
+@Table(name="product")
 public class Product {
 
 	@Id
-	@Column(name="ID")
-	@GeneratedValue(strategy=GenerationType.AUTO) 
+	@SequenceGenerator(name = "pk_product_sequence", sequenceName="product_sequence", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pk_product_sequence")
+	@Column(name="id")
 	private Integer id;
 	
-	@Column(name="NAME")
+	@Column(name="name")
 	private String name;
 	
-	@Column(name="VALUE")
+	@Column(name="value")
 	private Double value;
+	
+	public Product() {
+
+	}
 
 	public Product(String name, Double value) {
 		this.name = name;

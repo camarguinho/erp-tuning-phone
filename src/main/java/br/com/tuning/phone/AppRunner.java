@@ -10,8 +10,10 @@ public class AppRunner {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 		final Vertx vertx = Vertx.vertx();
-		vertx.deployVerticle(new SpringServerVerticle(applicationContext));
-		vertx.deployVerticle(new AppServerVerticle());
+		SpringServerVerticle spv = new SpringServerVerticle(applicationContext);
+		AppServerVerticle asv = new AppServerVerticle(spv.getProductService());
+		vertx.deployVerticle(spv);
+		vertx.deployVerticle(asv);
 		System.out.println("Deployment done!");
 	}
 	
