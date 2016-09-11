@@ -18,6 +18,10 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 	
+	public Product getProductById(Integer id){
+		return productRepository.findOne(id);
+	}
+	
 	public Product saveProduct(Product product){
 		return productRepository.save(product);
 	}
