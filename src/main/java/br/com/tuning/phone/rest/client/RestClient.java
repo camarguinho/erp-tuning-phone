@@ -1,4 +1,4 @@
-package br.com.tuning.phone;
+package br.com.tuning.phone.rest.client;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;

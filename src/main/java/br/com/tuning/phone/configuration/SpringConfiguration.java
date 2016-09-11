@@ -1,8 +1,6 @@
-package br.com.tuning.phone;
+package br.com.tuning.phone.configuration;
 
 import java.util.Properties;
-
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,16 +9,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"br.com.tuning.phone"})
+@EnableJpaRepositories(basePackages = {"br.com.tuning.phone.repository"})
 @PropertySource(value = { "classpath:application.properties" })
-@ComponentScan("br.com.tuning.phone")
+@ComponentScan("br.com.tuning.phone.service")
 public class SpringConfiguration {
 
 	@Autowired
@@ -33,7 +30,7 @@ public class SpringConfiguration {
 	    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 	    vendorAdapter.setShowSql(Boolean.TRUE);
 	    factory.setJpaVendorAdapter(vendorAdapter);
-	    factory.setPackagesToScan("br.com.tuning.phone");
+	    factory.setPackagesToScan("br.com.tuning.phone.entity");
 	    
 	    Properties jpaProperties = new Properties();
 	    jpaProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
@@ -43,6 +40,7 @@ public class SpringConfiguration {
 	    jpaProperties.put("hibernate.connection.url", env.getProperty("hibernate.connection.url"));
 	    jpaProperties.put("hibernate.connection.username", env.getProperty("hibernate.connection.username"));
 	    jpaProperties.put("hibernate.connection.password", env.getProperty("hibernate.connection.password"));
+	    jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 	    
 	    factory.setJpaProperties(jpaProperties);
 	    return factory;

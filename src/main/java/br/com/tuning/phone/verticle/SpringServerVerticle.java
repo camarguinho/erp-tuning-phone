@@ -1,6 +1,8 @@
-package br.com.tuning.phone;
+package br.com.tuning.phone.verticle;
 
 import org.springframework.context.ApplicationContext;
+
+import br.com.tuning.phone.service.ProductService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

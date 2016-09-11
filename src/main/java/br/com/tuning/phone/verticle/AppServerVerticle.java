@@ -1,10 +1,9 @@
-package br.com.tuning.phone;
+package br.com.tuning.phone.verticle;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -12,6 +11,9 @@ import io.vertx.ext.web.handler.StaticHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.tuning.phone.entity.Product;
+import br.com.tuning.phone.service.ProductService;
 
 public class AppServerVerticle extends AbstractVerticle{
 
@@ -72,15 +74,15 @@ public class AppServerVerticle extends AbstractVerticle{
 	}
 
 	private void addOne(RoutingContext routingContext) {
-		JsonObject json = routingContext.getBodyAsJson();
-		
-		final Product product = new Product(json.getString("name").toUpperCase(), 
-				new Double(json.getString("value")));
-		productService.saveProduct(product);
-		routingContext.response()
-		.setStatusCode(201)
-		.putHeader("content-type", "application/json; charset=utf-8")
-		.end(Json.encodePrettily(product));
+//		JsonObject json = routingContext.getBodyAsJson();
+//		
+//		final Product product = new Product(json.getString("name").toUpperCase(), 
+//				new Double(json.getString("value")));
+//		productService.saveProduct(product);
+//		routingContext.response()
+//		.setStatusCode(201)
+//		.putHeader("content-type", "application/json; charset=utf-8")
+//		.end(Json.encodePrettily(product));
 	}
 
 	private void deleteOne(RoutingContext routingContext) {
@@ -95,23 +97,23 @@ public class AppServerVerticle extends AbstractVerticle{
 	}
 
 	private void updateOne(RoutingContext routingContext) {
-		final String id = routingContext.request().getParam("id");
-		JsonObject json = routingContext.getBodyAsJson();
-		if (id == null || json == null) {
-			routingContext.response().setStatusCode(400).end();
-		} else {
-			final Integer idAsInteger = Integer.valueOf(id);
-			Product product = products.get(idAsInteger);
-			if (product == null) {
-				routingContext.response().setStatusCode(404).end();
-			} else {
-				product.setName(json.getString("name").toUpperCase());
-				product.setValue(new Double(json.getString("value")));
-				routingContext.response()
-				.putHeader("content-type", "application/json; charset=utf-8")
-				.end(Json.encodePrettily(product));
-			}
-		}
+//		final String id = routingContext.request().getParam("id");
+//		JsonObject json = routingContext.getBodyAsJson();
+//		if (id == null || json == null) {
+//			routingContext.response().setStatusCode(400).end();
+//		} else {
+//			final Integer idAsInteger = Integer.valueOf(id);
+//			Product product = products.get(idAsInteger);
+//			if (product == null) {
+//				routingContext.response().setStatusCode(404).end();
+//			} else {
+//				product.setName(json.getString("name").toUpperCase());
+//				product.setValue(new Double(json.getString("value")));
+//				routingContext.response()
+//				.putHeader("content-type", "application/json; charset=utf-8")
+//				.end(Json.encodePrettily(product));
+//			}
+//		}
 	}
 
 	private void getOne(RoutingContext routingContext) {

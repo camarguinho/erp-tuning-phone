@@ -1,9 +1,13 @@
-package br.com.tuning.phone;
+package br.com.tuning.phone.main;
 
 import io.vertx.core.Vertx;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import br.com.tuning.phone.configuration.SpringConfiguration;
+import br.com.tuning.phone.verticle.AppServerVerticle;
+import br.com.tuning.phone.verticle.SpringServerVerticle;
 
 public class AppRunner {
 	
