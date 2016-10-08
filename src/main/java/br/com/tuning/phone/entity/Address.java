@@ -24,6 +24,9 @@ public class Address {
 	@Column(length=50)
 	private String address;
 	
+	@Column(length=8)
+	private String number;
+	
 	@Column(length=25)
 	private String complement;
 	
@@ -36,7 +39,7 @@ public class Address {
 	@Column(length=50)
 	private String city;
 	
-	@Column(length=2)
+	@Column(length=25)
 	private String state;
 	
 	@Column(length=25)
@@ -68,6 +71,14 @@ public class Address {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getComplement() {
@@ -127,6 +138,8 @@ public class Address {
 		builder.append(zip_code);
 		builder.append(", address=");
 		builder.append(address);
+		builder.append(", number=");
+		builder.append(number);
 		builder.append(", complement=");
 		builder.append(complement);
 		builder.append(", neighborhood=");

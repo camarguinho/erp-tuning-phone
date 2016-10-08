@@ -30,7 +30,7 @@ public class Contact {
 	@Column(length=13)
 	private Integer phone_2;	
 	
-	@Column(length=50)
+	@Column(length=150)
 	private String observations;
 	
 	public Contact() {

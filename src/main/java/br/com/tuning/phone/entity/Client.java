@@ -31,6 +31,9 @@ public class Client {
 	@OneToOne
 	private Address address;
 	
+	@OneToOne
+	private Contact contact;
+	
 	public Client() {
 
 	}
@@ -75,6 +78,14 @@ public class Client {
 		this.address = address;
 	}
 
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -88,8 +99,10 @@ public class Client {
 		builder.append(document);
 		builder.append(", address=");
 		builder.append(address);
+		builder.append(", contact=");
+		builder.append(contact);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

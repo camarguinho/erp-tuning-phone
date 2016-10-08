@@ -46,7 +46,10 @@ public class Product {
 	private Date creation_date;
 	
 	@OneToOne
-	private Supplier provider;
+	private Supplier supplier;
+	
+	@OneToOne
+	private ProductType product_type;
 	
 	public Product() {
 
@@ -116,12 +119,28 @@ public class Product {
 		this.status = status;
 	}
 
-	public Supplier getProvider() {
-		return provider;
+	public Date getCreation_date() {
+		return creation_date;
 	}
 
-	public void setProvider(Supplier provider) {
-		this.provider = provider;
+	public void setCreation_date(Date creation_date) {
+		this.creation_date = creation_date;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public ProductType getProductType() {
+		return product_type;
+	}
+
+	public void setProductType(ProductType productType) {
+		this.product_type = productType;
 	}
 
 	@Override
@@ -143,8 +162,12 @@ public class Product {
 		builder.append(available_quantity);
 		builder.append(", status=");
 		builder.append(status);
-		builder.append(", provider=");
-		builder.append(provider);
+		builder.append(", creation_date=");
+		builder.append(creation_date);
+		builder.append(", supplier=");
+		builder.append(supplier);
+		builder.append(", productType=");
+		builder.append(product_type);
 		builder.append("]");
 		return builder.toString();
 	}
