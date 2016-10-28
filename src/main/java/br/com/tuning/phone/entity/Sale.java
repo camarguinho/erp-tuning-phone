@@ -26,35 +26,44 @@ public class Sale {
 	@OneToOne
 	private Client buyer;
 	
-	@OneToMany
-	private List<Product> products;
-	
-	@Column
+	@Column(precision=4, scale=2)
 	private Number amount;
 	
-	@Column
+	@Column(length=4)
 	private Integer quantity;
 	
-	@Column
+	@Column(length=100)
 	private String buyer_message;
 	
 	@Column
 	private Date sale_date;
 	
-	@Column
+	@Column(length=20)
 	private String status;
 	
-	@Column
+	@Column(length=30)
 	private String tracking_code;
 	
-	@Column
+	@Column(length=25)
 	private String form_of_payment;
 
-	@Column
+	@Column(length=100)
 	private String observations;
+	
+	@Column
+	private String sales_channel;
+	
+	@Column(precision=4, scale=2)	
+	private Number value_of_shipment;
 	
 	@OneToOne
 	private Address delivery_address;
+	
+	@OneToOne
+	private Address billing_address;
+	
+	@OneToMany
+	private List<Product> products;
 	
 	public Sale() {
 
@@ -74,14 +83,6 @@ public class Sale {
 
 	public void setBuyer(Client buyer) {
 		this.buyer = buyer;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
 	}
 
 	public Number getAmount() {
@@ -148,12 +149,44 @@ public class Sale {
 		this.observations = observations;
 	}
 
+	public String getSales_channel() {
+		return sales_channel;
+	}
+
+	public void setSales_channel(String sales_channel) {
+		this.sales_channel = sales_channel;
+	}
+
+	public Number getValue_of_shipment() {
+		return value_of_shipment;
+	}
+
+	public void setValue_of_shipment(Number value_of_shipment) {
+		this.value_of_shipment = value_of_shipment;
+	}
+
 	public Address getDelivery_address() {
 		return delivery_address;
 	}
 
 	public void setDelivery_address(Address delivery_address) {
 		this.delivery_address = delivery_address;
+	}
+
+	public Address getBilling_address() {
+		return billing_address;
+	}
+
+	public void setBilling_address(Address billing_address) {
+		this.billing_address = billing_address;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 	@Override
@@ -163,8 +196,6 @@ public class Sale {
 		builder.append(id);
 		builder.append(", buyer=");
 		builder.append(buyer);
-		builder.append(", products=");
-		builder.append(products);
 		builder.append(", amount=");
 		builder.append(amount);
 		builder.append(", quantity=");
@@ -181,10 +212,19 @@ public class Sale {
 		builder.append(form_of_payment);
 		builder.append(", observations=");
 		builder.append(observations);
+		builder.append(", sales_channel=");
+		builder.append(sales_channel);
+		builder.append(", value_of_shipment=");
+		builder.append(value_of_shipment);
 		builder.append(", delivery_address=");
 		builder.append(delivery_address);
+		builder.append(", billing_address=");
+		builder.append(billing_address);
+		builder.append(", products=");
+		builder.append(products);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
+
 }
