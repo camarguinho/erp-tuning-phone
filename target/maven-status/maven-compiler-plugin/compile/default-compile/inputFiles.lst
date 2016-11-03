@@ -4,6 +4,7 @@
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Address.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Client.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Document.java
+/home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Taxes.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/verticle/SpringServerVerticle.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/verticle/AppServerVerticle.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/repository/ClientRepository.java

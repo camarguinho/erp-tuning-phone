@@ -35,6 +35,9 @@ public class Sale {
 	@Column(length=100)
 	private String buyer_message;
 	
+	@Column(length=15)
+	private Number use_auth_protocol;
+	
 	@Column
 	private Date sale_date;
 	
@@ -56,14 +59,11 @@ public class Sale {
 	@Column(precision=4, scale=2)	
 	private Number value_of_shipment;
 	
-	@OneToOne
-	private Address delivery_address;
-	
-	@OneToOne
-	private Address billing_address;
-	
 	@OneToMany
 	private List<Product> products;
+	
+	@OneToOne
+	private Taxes taxes;
 	
 	public Sale() {
 
@@ -107,6 +107,14 @@ public class Sale {
 
 	public void setBuyer_message(String buyer_message) {
 		this.buyer_message = buyer_message;
+	}
+
+	public Number getUse_auth_protocol() {
+		return use_auth_protocol;
+	}
+
+	public void setUse_auth_protocol(Number use_auth_protocol) {
+		this.use_auth_protocol = use_auth_protocol;
 	}
 
 	public Date getSale_date() {
@@ -165,22 +173,6 @@ public class Sale {
 		this.value_of_shipment = value_of_shipment;
 	}
 
-	public Address getDelivery_address() {
-		return delivery_address;
-	}
-
-	public void setDelivery_address(Address delivery_address) {
-		this.delivery_address = delivery_address;
-	}
-
-	public Address getBilling_address() {
-		return billing_address;
-	}
-
-	public void setBilling_address(Address billing_address) {
-		this.billing_address = billing_address;
-	}
-
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -189,42 +181,14 @@ public class Sale {
 		this.products = products;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Sale [id=");
-		builder.append(id);
-		builder.append(", buyer=");
-		builder.append(buyer);
-		builder.append(", amount=");
-		builder.append(amount);
-		builder.append(", quantity=");
-		builder.append(quantity);
-		builder.append(", buyer_message=");
-		builder.append(buyer_message);
-		builder.append(", sale_date=");
-		builder.append(sale_date);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", tracking_code=");
-		builder.append(tracking_code);
-		builder.append(", form_of_payment=");
-		builder.append(form_of_payment);
-		builder.append(", observations=");
-		builder.append(observations);
-		builder.append(", sales_channel=");
-		builder.append(sales_channel);
-		builder.append(", value_of_shipment=");
-		builder.append(value_of_shipment);
-		builder.append(", delivery_address=");
-		builder.append(delivery_address);
-		builder.append(", billing_address=");
-		builder.append(billing_address);
-		builder.append(", products=");
-		builder.append(products);
-		builder.append("]");
-		return builder.toString();
+	public Taxes getTaxes() {
+		return taxes;
 	}
 
+	public void setTaxes(Taxes taxes) {
+		this.taxes = taxes;
+	}
+	
+	
 
 }

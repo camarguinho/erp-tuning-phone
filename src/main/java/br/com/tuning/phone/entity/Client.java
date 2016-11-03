@@ -29,7 +29,10 @@ public class Client {
 	private Document document;
 	
 	@OneToOne
-	private Address address;
+	private Address billing_address;
+	
+	@OneToOne
+	private Address delivery_address;
 	
 	@OneToOne
 	private Contact contact;
@@ -70,12 +73,20 @@ public class Client {
 		this.document = document;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Address getBilling_address() {
+		return billing_address;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setBilling_address(Address billing_address) {
+		this.billing_address = billing_address;
+	}
+
+	public Address getDelivery_address() {
+		return delivery_address;
+	}
+
+	public void setDelivery_address(Address delivery_address) {
+		this.delivery_address = delivery_address;
 	}
 
 	public Contact getContact() {
@@ -86,23 +97,5 @@ public class Client {
 		this.contact = contact;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Client [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", nick_name=");
-		builder.append(nick_name);
-		builder.append(", document=");
-		builder.append(document);
-		builder.append(", address=");
-		builder.append(address);
-		builder.append(", contact=");
-		builder.append(contact);
-		builder.append("]");
-		return builder.toString();
-	}
-
+	
 }

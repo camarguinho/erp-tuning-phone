@@ -24,6 +24,9 @@ public class Product {
 	@Column(length=50)
 	private String name;
 	
+	@Column(length=8)
+	private Number ncm;
+	
 	@Column(precision=4, scale=2)
 	private Number value_purchase;
 	
@@ -69,6 +72,14 @@ public class Product {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Number getNcm() {
+		return ncm;
+	}
+
+	public void setNcm(Number ncm) {
+		this.ncm = ncm;
 	}
 
 	public Number getValue_purchase() {
@@ -135,41 +146,13 @@ public class Product {
 		this.supplier = supplier;
 	}
 
-	public ProductType getProductType() {
+	public ProductType getProduct_type() {
 		return product_type;
 	}
 
-	public void setProductType(ProductType productType) {
-		this.product_type = productType;
+	public void setProduct_type(ProductType product_type) {
+		this.product_type = product_type;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Product [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", value_purchase=");
-		builder.append(value_purchase);
-		builder.append(", value_sale=");
-		builder.append(value_sale);
-		builder.append(", specifications=");
-		builder.append(specifications);
-		builder.append(", color=");
-		builder.append(color);
-		builder.append(", available_quantity=");
-		builder.append(available_quantity);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", creation_date=");
-		builder.append(creation_date);
-		builder.append(", supplier=");
-		builder.append(supplier);
-		builder.append(", productType=");
-		builder.append(product_type);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 }

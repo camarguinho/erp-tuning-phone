@@ -11,6 +11,7 @@ br/com/tuning/phone/entity/Supplier.class
 br/com/tuning/phone/entity/Document.class
 br/com/tuning/phone/verticle/AppServerVerticle.class
 br/com/tuning/phone/repository/SaleRepository.class
+br/com/tuning/phone/entity/Taxes.class
 br/com/tuning/phone/main/AppRunner.class
 br/com/tuning/phone/service/SupplierService.class
 br/com/tuning/phone/service/ProductService.class
