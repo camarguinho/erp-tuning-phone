@@ -14,26 +14,23 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="sale")
-public class Sale {
-
+@Table(name="purchase")
+public class Purchase {
+	
 	@Id
 	@Column
-	@SequenceGenerator(name = "pk_sale_sequence", sequenceName="sale_sequence", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pk_sale_sequence")
+	@SequenceGenerator(name = "pk_purchase_sequence", sequenceName="purchase_sequence", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pk_purchase_sequence")
 	private Integer id;
 	
 	@OneToOne
-	private Client buyer;
+	private Supplier supplier;
 	
 	@Column(precision=4, scale=2)
 	private Number amount;
-	
-	@Column(length=100)
-	private String buyer_message;
-	
+		
 	@Column
-	private Date sale_date;
+	private Date purchase_date;
 	
 	@Column(length=20)
 	private String status;
@@ -47,9 +44,6 @@ public class Sale {
 	@Column(length=100)
 	private String observations;
 	
-	@Column
-	private String sales_channel;
-	
 	@Column(precision=4, scale=2)	
 	private Number value_of_shipment;
 	
@@ -62,8 +56,8 @@ public class Sale {
 	@OneToOne
 	private Invoice invoice;
 	
-	public Sale() {
-
+	public Purchase(){
+		
 	}
 
 	public Integer getId() {
@@ -74,12 +68,12 @@ public class Sale {
 		this.id = id;
 	}
 
-	public Client getBuyer() {
-		return buyer;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
-	public void setBuyer(Client buyer) {
-		this.buyer = buyer;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 	public Number getAmount() {
@@ -90,20 +84,12 @@ public class Sale {
 		this.amount = amount;
 	}
 
-	public String getBuyer_message() {
-		return buyer_message;
+	public Date getPurchase_date() {
+		return purchase_date;
 	}
 
-	public void setBuyer_message(String buyer_message) {
-		this.buyer_message = buyer_message;
-	}
-
-	public Date getSale_date() {
-		return sale_date;
-	}
-
-	public void setSale_date(Date sale_date) {
-		this.sale_date = sale_date;
+	public void setPurchase_date(Date purchase_date) {
+		this.purchase_date = purchase_date;
 	}
 
 	public String getStatus() {
@@ -138,14 +124,6 @@ public class Sale {
 		this.observations = observations;
 	}
 
-	public String getSales_channel() {
-		return sales_channel;
-	}
-
-	public void setSales_channel(String sales_channel) {
-		this.sales_channel = sales_channel;
-	}
-
 	public Number getValue_of_shipment() {
 		return value_of_shipment;
 	}
@@ -177,7 +155,5 @@ public class Sale {
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
 	}
-	
-	
-
+		
 }

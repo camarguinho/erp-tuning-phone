@@ -1,5 +1,6 @@
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/repository/SaleRepository.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/main/AppRunner.java
+/home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Purchase.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Contact.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Address.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Client.java
@@ -8,6 +9,7 @@
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/verticle/SpringServerVerticle.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/verticle/AppServerVerticle.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/repository/ClientRepository.java
+/home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Invoice.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/ProductType.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/repository/SupplierRepository.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/service/ProductService.java
