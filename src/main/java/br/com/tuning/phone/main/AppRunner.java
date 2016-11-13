@@ -25,7 +25,6 @@ public class AppRunner {
 				supplierVerticle.getSupplierService(),
 				saleVerticle.getSaleService());
 		
-		vertx.deployVerticle(productVerticle);
 		vertx.deployVerticle(asv);
 		
 		System.out.println("Deployment done!");
