@@ -1,12 +1,13 @@
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/repository/SaleRepository.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/main/AppRunner.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Purchase.java
+/home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/service/SaleService.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Contact.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Address.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Client.java
+/home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/service/ClientService.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Document.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Taxes.java
-/home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/verticle/SpringServerVerticle.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/verticle/AppServerVerticle.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/repository/ClientRepository.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Invoice.java
@@ -17,6 +18,7 @@
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Supplier.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Product.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/configuration/SpringConfiguration.java
+/home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/verticle/ServerVerticle.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/rest/client/RestClient.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/entity/Sale.java
 /home/camargo/workspace/erp-tuning-phone/src/main/java/br/com/tuning/phone/service/SupplierService.java

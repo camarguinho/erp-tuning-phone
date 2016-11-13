@@ -12,22 +12,22 @@ import br.com.tuning.phone.repository.ProductRepository;
 public class ProductService {
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductRepository repository;
 	
 	public List<Product> getAllProducts(){
-		return productRepository.findAll();
+		return repository.findAll();
 	}
 	
 	public Product getProductById(Integer id){
-		return productRepository.findOne(id);
+		return repository.findOne(id);
 	}
 	
 	public Product saveProduct(Product product){
-		return productRepository.save(product);
+		return repository.save(product);
 	}
 	
 	public void deleteProduct(Product product){
-		productRepository.delete(product);
+		repository.delete(product);
 	}
 	
 }

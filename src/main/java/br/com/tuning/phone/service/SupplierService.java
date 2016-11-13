@@ -12,22 +12,22 @@ import br.com.tuning.phone.repository.SupplierRepository;
 public class SupplierService {
 
 	@Autowired
-	private SupplierRepository supplierRepository;
+	private SupplierRepository repository;
 	
-	public List<Supplier> getAllProducts(){
-		return supplierRepository.findAll();
+	public List<Supplier> getAllSuppliers(){
+		return repository.findAll();
 	}
 	
 	public Supplier getSupplierById(Integer id){
-		return supplierRepository.getOne(id);
+		return repository.getOne(id);
 	}
 	
 	public Supplier saveSupplier(Supplier supplier){
-		return supplierRepository.save(supplier);
+		return repository.save(supplier);
 	}
 	
 	public void deleteSupplier(Supplier supplier){
-		supplierRepository.delete(supplier);
+		repository.delete(supplier);
 	}
 	
 }
