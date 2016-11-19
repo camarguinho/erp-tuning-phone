@@ -1,24 +1,16 @@
 package br.com.tuning.phone.verticle;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.com.tuning.phone.entity.Client;
 import br.com.tuning.phone.entity.Product;
-import br.com.tuning.phone.entity.Sale;
-import br.com.tuning.phone.entity.Supplier;
 import br.com.tuning.phone.service.ClientService;
 import br.com.tuning.phone.service.ProductService;
 import br.com.tuning.phone.service.SaleService;
 import br.com.tuning.phone.service.SupplierService;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
-import io.vertx.ext.web.handler.StaticHandler;
 
 public class AppServerVerticle extends AbstractVerticle{
 
