@@ -51,6 +51,10 @@ public class Taxes {
 	@Column(precision=4, scale=2)
 	private Number total_note_value;
 
+	public Taxes() {
+		
+	}
+
 	public Number getIcms_base_calculation() {
 		return icms_base_calculation;
 	}
@@ -138,6 +142,20 @@ public class Taxes {
 	public void setTotal_note_value(Number total_note_value) {
 		this.total_note_value = total_note_value;
 	}
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Taxes {id:").append(id).append(", icms_base_calculation:").append(icms_base_calculation)
+				.append(", value_icms:").append(value_icms).append(", icms_subst_base_calculation:")
+				.append(icms_subst_base_calculation).append(", value_icms_subst:").append(value_icms_subst)
+				.append(", total_value_of_the_products:").append(total_value_of_the_products)
+				.append(", cost_of_freight:").append(cost_of_freight).append(", safe_price:").append(safe_price)
+				.append(", discount:").append(discount).append(", other_expenses:").append(other_expenses)
+				.append(", value_ipi:").append(value_ipi).append(", total_note_value:").append(total_note_value)
+				.append("}");
+		return builder.toString();
+	}
+	
+	
 }

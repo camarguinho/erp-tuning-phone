@@ -31,12 +31,12 @@ public class ServerVerticle extends AbstractVerticle{
 		saleService = (SaleService) applicationContext.getBean("saleService");
 	}
 	
-	private Handler<Message<String>> allProductsHandler(ProductService service) {
+	private Handler<Message<String>> productsHandler(ProductService service) {
 	    // It is important to use an executeBlocking construct here
 	    // as the service calls are blocking (dealing with a database)
 	    return msg -> vertx.<String>executeBlocking(future -> {
 	          try {
-	            future.complete(mapper.writeValueAsString(service.getAllProducts()));
+	            future.complete(mapper.writeValueAsString(service));
 	          } catch (JsonProcessingException e) {
 	            System.out.println("Failed to serialize result");
 	            future.fail(e);
@@ -51,12 +51,12 @@ public class ServerVerticle extends AbstractVerticle{
 	        });
 	  }
 	
-	private Handler<Message<String>> allClientsHandler(ClientService service) {
+	private Handler<Message<String>> clientsHandler(ClientService service) {
 	    // It is important to use an executeBlocking construct here
 	    // as the service calls are blocking (dealing with a database)
 	    return msg -> vertx.<String>executeBlocking(future -> {
 	          try {
-	            future.complete(mapper.writeValueAsString(service.getAllClients()));
+	            future.complete(mapper.writeValueAsString(service));
 	          } catch (JsonProcessingException e) {
 	            System.out.println("Failed to serialize result");
 	            future.fail(e);
@@ -71,12 +71,12 @@ public class ServerVerticle extends AbstractVerticle{
 	        });
 	  }
 	
-	private Handler<Message<String>> allSuppliersHandler(SupplierService service) {
+	private Handler<Message<String>> suppliersHandler(SupplierService service) {
 	    // It is important to use an executeBlocking construct here
 	    // as the service calls are blocking (dealing with a database)
 	    return msg -> vertx.<String>executeBlocking(future -> {
 	          try {
-	            future.complete(mapper.writeValueAsString(service.getAllSuppliers()));
+	            future.complete(mapper.writeValueAsString(service));
 	          } catch (JsonProcessingException e) {
 	            System.out.println("Failed to serialize result");
 	            future.fail(e);
@@ -91,12 +91,12 @@ public class ServerVerticle extends AbstractVerticle{
 	        });
 	  }
 	
-	private Handler<Message<String>> allSalesHandler(SaleService service) {
+	private Handler<Message<String>> salesHandler(SaleService service) {
 	    // It is important to use an executeBlocking construct here
 	    // as the service calls are blocking (dealing with a database)
 	    return msg -> vertx.<String>executeBlocking(future -> {
 	          try {
-	            future.complete(mapper.writeValueAsString(service.getAllSales()));
+	            future.complete(mapper.writeValueAsString(service));
 	          } catch (JsonProcessingException e) {
 	            System.out.println("Failed to serialize result");
 	            future.fail(e);
@@ -116,10 +116,10 @@ public class ServerVerticle extends AbstractVerticle{
 		super.start();
 		new AppServerVerticle(productService, clientService, supplierService, saleService);
 		vertx.eventBus().<String>consumer("allServices")
-		.handler(allProductsHandler(productService))
-		.handler(allClientsHandler(clientService))
-		.handler(allSuppliersHandler(supplierService))
-		.handler(allSalesHandler(saleService));
+		.handler(productsHandler(productService))
+		.handler(clientsHandler(clientService))
+		.handler(suppliersHandler(supplierService))
+		.handler(salesHandler(saleService));
 	}
 	
 	public ProductService getProductService(){

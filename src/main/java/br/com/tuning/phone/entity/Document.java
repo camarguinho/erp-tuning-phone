@@ -22,12 +22,12 @@ public class Document {
 	private String type;
 	
 	@Column(length=14)
-	private Integer number;
+	private Long number;
 	
 	public Document() {
 
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -44,25 +44,20 @@ public class Document {
 		this.type = type;
 	}
 
-	public Integer getNumber() {
+	public Long getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(Long number) {
 		this.number = number;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Document [id=");
-		builder.append(id);
-		builder.append(", type=");
-		builder.append(type);
-		builder.append(", number=");
-		builder.append(number);
-		builder.append("]");
+		builder.append("Document {id:").append(id).append(", type:").append(type).append(", number:").append(number)
+				.append("}");
 		return builder.toString();
 	}
-	
+
 }

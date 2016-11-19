@@ -1,5 +1,6 @@
 package br.com.tuning.phone.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,27 +27,27 @@ public class Supplier {
 	private String fantasy_name;
 
 	@Column(length=15)
-	private Integer municipal_registration;
+	private Long municipal_registration;
 	
 	@Column(length=15)
-	private Integer state_registration;
+	private Long state_registration;
 	
 	@Column(precision=8, scale=2)
-	private Number capital_social;
+	private Float capital_social;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Document document;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Address address;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Contact contact;
 	
 	public Supplier() {
 
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -71,27 +72,27 @@ public class Supplier {
 		this.fantasy_name = fantasy_name;
 	}
 
-	public Integer getMunicipal_registration() {
+	public Long getMunicipal_registration() {
 		return municipal_registration;
 	}
 
-	public void setMunicipal_registration(Integer municipal_registration) {
+	public void setMunicipal_registration(Long municipal_registration) {
 		this.municipal_registration = municipal_registration;
 	}
 
-	public Integer getState_registration() {
+	public Long getState_registration() {
 		return state_registration;
 	}
 
-	public void setState_registration(Integer state_registration) {
+	public void setState_registration(Long state_registration) {
 		this.state_registration = state_registration;
 	}
 
-	public Number getCapital_social() {
+	public Float getCapital_social() {
 		return capital_social;
 	}
 
-	public void setCapital_social(Number capital_social) {
+	public void setCapital_social(Float capital_social) {
 		this.capital_social = capital_social;
 	}
 
@@ -122,26 +123,13 @@ public class Supplier {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Supplier [id=");
-		builder.append(id);
-		builder.append(", company_name=");
-		builder.append(company_name);
-		builder.append(", fantasy_name=");
-		builder.append(fantasy_name);
-		builder.append(", municipal_registration=");
-		builder.append(municipal_registration);
-		builder.append(", state_registration=");
-		builder.append(state_registration);
-		builder.append(", capital_social=");
-		builder.append(capital_social);
-		builder.append(", document=");
-		builder.append(document);
-		builder.append(", address=");
-		builder.append(address);
-		builder.append(", contact=");
-		builder.append(contact);
-		builder.append("]");
+		builder.append("Supplier {id:").append(id).append(", company_name:").append(company_name)
+				.append(", fantasy_name:").append(fantasy_name).append(", municipal_registration:")
+				.append(municipal_registration).append(", state_registration:").append(state_registration)
+				.append(", capital_social:").append(capital_social).append(", document:").append(document)
+				.append(", address:").append(address).append(", contact:").append(contact).append("}");
 		return builder.toString();
 	}
+
 	
 }

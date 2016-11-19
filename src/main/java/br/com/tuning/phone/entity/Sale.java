@@ -3,6 +3,7 @@ package br.com.tuning.phone.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Sale {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pk_sale_sequence")
 	private Integer id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Client buyer;
 	
 	@Column(precision=4, scale=2)
@@ -53,19 +54,19 @@ public class Sale {
 	@Column(precision=4, scale=2)	
 	private Number value_of_shipment;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Product> products;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Taxes taxes;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Invoice invoice;
 	
 	public Sale() {
 
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -177,7 +178,18 @@ public class Sale {
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Sale {id:").append(id).append(", buyer:").append(buyer).append(", amount:").append(amount)
+				.append(", buyer_message:").append(buyer_message).append(", sale_date:").append(sale_date)
+				.append(", status:").append(status).append(", tracking_code:").append(tracking_code)
+				.append(", form_of_payment:").append(form_of_payment).append(", observations:").append(observations)
+				.append(", sales_channel:").append(sales_channel).append(", value_of_shipment:")
+				.append(value_of_shipment).append(", products:").append(products).append(", taxes:").append(taxes)
+				.append(", invoice:").append(invoice).append("}");
+		return builder.toString();
+	}
+	
 }

@@ -17,15 +17,11 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 
 public class AppServerVerticle extends AbstractVerticle{
 
-	private List<Product> products = new ArrayList<Product>();
-	private List<Client> clients = new ArrayList<Client>();
-	private List<Supplier> suppliers = new ArrayList<Supplier>();
-	private List<Sale> sales = new ArrayList<Sale>();
-	
 	private ProductService productService;
 	private ClientService clientService;
 	private SupplierService supplierService;
@@ -44,23 +40,13 @@ public class AppServerVerticle extends AbstractVerticle{
 		Router router = Router.router(vertx);
 		setRoutingContext(router);
 		createServer(fut, router);
-		
-		products = productService.getAllProducts();
-		clients = clientService.getAllClients();
-		suppliers = supplierService.getAllSuppliers();
-		sales = saleService.getAllSales();
 	}	
 	
 	private void setRoutingContext(Router router) {
-		router.route("/").handler(routingContext -> {
-			HttpServerResponse response = routingContext.response();
-			response
-			.putHeader("content-type", "text/html")
-			.end("<h1>Bora de Rest!</h1>");
-		});
-		
-		router.route("/assets/*").handler(StaticHandler.create("assets"));
+		router.route("/api/products*").handler(BodyHandler.create());
 		router.get("/api/products").handler(this::getAllProducts);
+		router.post("/api/products").handler(this::addProduct);
+		
 		router.get("/api/clients").handler(this::getAllClients);
 		router.get("/api/suppliers").handler(this::getAllSuppliers);
 		router.get("/api/sales").handler(this::getAllSales);
@@ -85,85 +71,36 @@ public class AppServerVerticle extends AbstractVerticle{
 	private void getAllProducts(RoutingContext routingContext) {
 		routingContext.response()
 		.putHeader("content-type", "application/json; charset=utf-8")
-		.end(Json.encodePrettily(products));
+		.end(Json.encodePrettily(productService.getAllProducts()));
 	}
 	
 	private void getAllClients(RoutingContext routingContext) {
 		routingContext.response()
 		.putHeader("content-type", "application/json; charset=utf-8")
-		.end(Json.encodePrettily(clients));
+		.end(Json.encodePrettily(clientService.getAllClients()));
 	}
 	
 	private void getAllSuppliers(RoutingContext routingContext) {
 		routingContext.response()
 		.putHeader("content-type", "application/json; charset=utf-8")
-		.end(Json.encodePrettily(suppliers));
+		.end(Json.encodePrettily(supplierService.getAllSuppliers()));
 	}
 	
 	private void getAllSales(RoutingContext routingContext) {
 		routingContext.response()
 		.putHeader("content-type", "application/json; charset=utf-8")
-		.end(Json.encodePrettily(sales));
+		.end(Json.encodePrettily(saleService.getAllSales()));
 	}
 	
-//	private void addOne(RoutingContext routingContext) {
-//		JsonObject json = routingContext.getBodyAsJson();
-//		
-//		final Product product = new Product(json.getString("name").toUpperCase(), 
-//				new Double(json.getString("value")));
-//		productService.saveProduct(product);
-//		routingContext.response()
-//		.setStatusCode(201)
-//		.putHeader("content-type", "application/json; charset=utf-8")
-//		.end(Json.encodePrettily(product));
-//	}
+	private void addProduct(RoutingContext routingContext) {
+		final Product product = Json.decodeValue(routingContext.getBodyAsString(),
+				Product.class);
+		productService.saveProduct(product);
+		routingContext.response()
+			.setStatusCode(201)
+			.putHeader("content-type", "application/json; charset=utf-8")
+			.end(Json.encodePrettily(product));
+	}
 
-//	private void deleteOne(RoutingContext routingContext) {
-//		String id = routingContext.request().getParam("id");
-//		if (id == null) {
-//			routingContext.response().setStatusCode(400).end();
-//		} else {
-//			Integer idAsInteger = Integer.valueOf(id);
-//			products.remove(idAsInteger);
-//		}
-//		routingContext.response().setStatusCode(204).end();
-//	}
-
-//	private void updateOne(RoutingContext routingContext) {
-//		final String id = routingContext.request().getParam("id");
-//		JsonObject json = routingContext.getBodyAsJson();
-//		if (id == null || json == null) {
-//			routingContext.response().setStatusCode(400).end();
-//		} else {
-//			final Integer idAsInteger = Integer.valueOf(id);
-//			Product product = products.get(idAsInteger);
-//			if (product == null) {
-//				routingContext.response().setStatusCode(404).end();
-//			} else {
-//				product.setName(json.getString("name").toUpperCase());
-//				product.setValue(new Double(json.getString("value")));
-//				routingContext.response()
-//				.putHeader("content-type", "application/json; charset=utf-8")
-//				.end(Json.encodePrettily(product));
-//			}
-//		}
-//	}
-
-//	private void getOne(RoutingContext routingContext) {
-//		final String id = routingContext.request().getParam("id");
-//		if (id == null) {
-//			routingContext.response().setStatusCode(400).end();
-//		} else {
-//			final Integer idAsInteger = Integer.valueOf(id);
-//			Product product = products.get(idAsInteger);
-//			if (product == null) {
-//				routingContext.response().setStatusCode(404).end();
-//			} else {
-//				routingContext.response()
-//				.putHeader("content-type", "application/json; charset=utf-8")
-//				.end(Json.encodePrettily(product));
-//			}
-//		}
-//	}
 
 }

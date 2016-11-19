@@ -51,7 +51,7 @@ public class Invoice {
 	public Invoice(){
 		
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -138,6 +138,17 @@ public class Invoice {
 
 	public void setInput_output_date(Date input_output_date) {
 		this.input_output_date = input_output_date;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Invoice {id:").append(id).append(", type:").append(type).append(", number:").append(number)
+				.append(", serie:").append(serie).append(", sheet:").append(sheet).append(", access_key:")
+				.append(access_key).append(", operation_type:").append(operation_type).append(", use_auth_protocol:")
+				.append(use_auth_protocol).append(", cfop:").append(cfop).append(", date_of_issue:")
+				.append(date_of_issue).append(", input_output_date:").append(input_output_date).append("}");
+		return builder.toString();
 	}
 
 	

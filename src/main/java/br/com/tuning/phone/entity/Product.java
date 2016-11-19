@@ -2,6 +2,7 @@ package br.com.tuning.phone.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,13 +26,13 @@ public class Product {
 	private String name;
 	
 	@Column(length=8)
-	private Number ncm;
+	private Long ncm;
 	
 	@Column(precision=4, scale=2)
-	private Number value_purchase;
+	private Float value_purchase;
 	
 	@Column(precision=4, scale=2)
-	private Number value_sale;
+	private Float value_sale;
 	
 	@Column(length=100)
 	private String specifications;
@@ -48,16 +49,16 @@ public class Product {
 	@Column
 	private Date creation_date;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Supplier supplier;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private ProductType product_type;
 	
 	public Product() {
 
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -74,27 +75,27 @@ public class Product {
 		this.name = name;
 	}
 
-	public Number getNcm() {
+	public Long getNcm() {
 		return ncm;
 	}
 
-	public void setNcm(Number ncm) {
+	public void setNcm(Long ncm) {
 		this.ncm = ncm;
 	}
 
-	public Number getValue_purchase() {
+	public Float getValue_purchase() {
 		return value_purchase;
 	}
 
-	public void setValue_purchase(Number value_purchase) {
+	public void setValue_purchase(Float value_purchase) {
 		this.value_purchase = value_purchase;
 	}
 
-	public Number getValue_sale() {
+	public Float getValue_sale() {
 		return value_sale;
 	}
 
-	public void setValue_sale(Number value_sale) {
+	public void setValue_sale(Float value_sale) {
 		this.value_sale = value_sale;
 	}
 
@@ -153,6 +154,20 @@ public class Product {
 	public void setProduct_type(ProductType product_type) {
 		this.product_type = product_type;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Product {id:").append(id).append(", name:").append(name).append(", ncm:").append(ncm)
+				.append(", value_purchase:").append(value_purchase).append(", value_sale:").append(value_sale)
+				.append(", specifications:").append(specifications).append(", color:").append(color)
+				.append(", available_quantity:").append(available_quantity).append(", status:").append(status)
+				.append(", creation_date:").append(creation_date).append(", supplier:").append(supplier)
+				.append(", product_type:").append(product_type).append("}");
+		return builder.toString();
+	}
+	
+	
 	
 
 }

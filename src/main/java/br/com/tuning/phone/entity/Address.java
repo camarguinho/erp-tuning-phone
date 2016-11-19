@@ -48,7 +48,7 @@ public class Address {
 	public Address() {
 
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -132,28 +132,14 @@ public class Address {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Address [id=");
-		builder.append(id);
-		builder.append(", zip_code=");
-		builder.append(zip_code);
-		builder.append(", address=");
-		builder.append(address);
-		builder.append(", number=");
-		builder.append(number);
-		builder.append(", complement=");
-		builder.append(complement);
-		builder.append(", neighborhood=");
-		builder.append(neighborhood);
-		builder.append(", ibge_code=");
-		builder.append(ibge_code);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", state=");
-		builder.append(state);
-		builder.append(", contry=");
-		builder.append(contry);
-		builder.append("]");
+		builder.append("Address {id:").append(id).append(", zip_code:").append(zip_code).append(", address:")
+				.append(address).append(", number:").append(number).append(", complement:").append(complement)
+				.append(", neighborhood:").append(neighborhood).append(", ibge_code:").append(ibge_code)
+				.append(", city:").append(city).append(", state:").append(state).append(", contry:").append(contry)
+				.append("}");
 		return builder.toString();
 	}
 
+
+	
 }

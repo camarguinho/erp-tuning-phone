@@ -24,7 +24,7 @@ public class ProductType {
 	public ProductType() {
 
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -44,12 +44,10 @@ public class ProductType {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ProductType [id=");
-		builder.append(id);
-		builder.append(", description_type=");
-		builder.append(description_type);
-		builder.append("]");
+		builder.append("ProductType {id:").append(id).append(", description_type:").append(description_type)
+				.append("}");
 		return builder.toString();
 	}
+
 	
 }

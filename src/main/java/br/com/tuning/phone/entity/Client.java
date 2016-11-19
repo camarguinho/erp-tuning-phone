@@ -1,5 +1,6 @@
 package br.com.tuning.phone.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,22 +26,22 @@ public class Client {
 	@Column(length=25)
 	private String nick_name;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Document document;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Address billing_address;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Address delivery_address;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Contact contact;
 	
 	public Client() {
 
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -95,6 +96,16 @@ public class Client {
 
 	public void setContact(Contact contact) {
 		this.contact = contact;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Client {id:").append(id).append(", name:").append(name).append(", nick_name:").append(nick_name)
+				.append(", document:").append(document).append(", billing_address:").append(billing_address)
+				.append(", delivery_address:").append(delivery_address).append(", contact:").append(contact)
+				.append("}");
+		return builder.toString();
 	}
 
 	
