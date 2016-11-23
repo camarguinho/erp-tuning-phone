@@ -154,6 +154,14 @@ public class Product {
 	public void setProduct_type(ProductType product_type) {
 		this.product_type = product_type;
 	}
+	
+	public Long getTimeOfCreationDate(){
+		return creation_date != null ? creation_date.getTime() : null;
+	}
+	
+	public void setTimeOfCreationDate(Long time){
+		creation_date = new Date(time);
+	}
 
 	@Override
 	public String toString() {

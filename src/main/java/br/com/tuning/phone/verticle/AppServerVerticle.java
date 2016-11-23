@@ -7,10 +7,12 @@ import br.com.tuning.phone.service.SaleService;
 import br.com.tuning.phone.service.SupplierService;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.CorsHandler;
 
 public class AppServerVerticle extends AbstractVerticle{
 
@@ -35,6 +37,13 @@ public class AppServerVerticle extends AbstractVerticle{
 	}	
 	
 	private void setRoutingContext(Router router) {
+		router.route().handler(CorsHandler.create("*")
+				.allowedMethod(HttpMethod.GET)
+				.allowedMethod(HttpMethod.POST)
+				.allowedMethod(HttpMethod.OPTIONS)
+				.allowedHeader("X-PINGARUNER")
+			    .allowedHeader("Content-Type"));
+		
 		router.route("/api/products*").handler(BodyHandler.create());
 		router.get("/api/products").handler(this::getAllProducts);
 		router.post("/api/products").handler(this::addProduct);
