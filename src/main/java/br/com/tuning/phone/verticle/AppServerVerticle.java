@@ -1,5 +1,6 @@
 package br.com.tuning.phone.verticle;
 
+import br.com.tuning.phone.entity.Client;
 import br.com.tuning.phone.entity.Product;
 import br.com.tuning.phone.service.ClientService;
 import br.com.tuning.phone.service.ProductService;
@@ -40,6 +41,8 @@ public class AppServerVerticle extends AbstractVerticle{
 		router.route().handler(CorsHandler.create("*")
 				.allowedMethod(HttpMethod.GET)
 				.allowedMethod(HttpMethod.POST)
+				.allowedMethod(HttpMethod.DELETE)
+				.allowedMethod(HttpMethod.PUT)
 				.allowedMethod(HttpMethod.OPTIONS)
 				.allowedHeader("X-PINGARUNER")
 			    .allowedHeader("Content-Type"));
@@ -48,7 +51,10 @@ public class AppServerVerticle extends AbstractVerticle{
 		router.get("/api/products").handler(this::getAllProducts);
 		router.post("/api/products").handler(this::addProduct);
 		
+		router.route("/api/clients*").handler(BodyHandler.create());
 		router.get("/api/clients").handler(this::getAllClients);
+		router.post("/api/clients").handler(this::addClient);
+		
 		router.get("/api/suppliers").handler(this::getAllSuppliers);
 		router.get("/api/sales").handler(this::getAllSales);
 	}
@@ -101,6 +107,16 @@ public class AppServerVerticle extends AbstractVerticle{
 			.setStatusCode(201)
 			.putHeader("content-type", "application/json; charset=utf-8")
 			.end(Json.encodePrettily(product));
+	}
+	
+	private void addClient(RoutingContext routingContext) {
+		final Client client = Json.decodeValue(routingContext.getBodyAsString(),
+				Client.class);
+		clientService.saveClient(client);
+		routingContext.response()
+			.setStatusCode(201)
+			.putHeader("content-type", "application/json; charset=utf-8")
+			.end(Json.encodePrettily(client));
 	}
 
 
