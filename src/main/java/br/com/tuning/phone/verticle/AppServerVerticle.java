@@ -2,6 +2,7 @@ package br.com.tuning.phone.verticle;
 
 import br.com.tuning.phone.entity.Client;
 import br.com.tuning.phone.entity.Product;
+import br.com.tuning.phone.entity.Supplier;
 import br.com.tuning.phone.service.ClientService;
 import br.com.tuning.phone.service.ProductService;
 import br.com.tuning.phone.service.SaleService;
@@ -55,7 +56,10 @@ public class AppServerVerticle extends AbstractVerticle{
 		router.get("/api/clients").handler(this::getAllClients);
 		router.post("/api/clients").handler(this::addClient);
 		
+		router.route("/api/suppliers*").handler(BodyHandler.create());
 		router.get("/api/suppliers").handler(this::getAllSuppliers);
+		router.post("/api/suppliers").handler(this::addSupplier);
+		
 		router.get("/api/sales").handler(this::getAllSales);
 	}
 
@@ -117,6 +121,16 @@ public class AppServerVerticle extends AbstractVerticle{
 			.setStatusCode(201)
 			.putHeader("content-type", "application/json; charset=utf-8")
 			.end(Json.encodePrettily(client));
+	}
+	
+	private void addSupplier(RoutingContext routingContext) {
+		final Supplier supplier = Json.decodeValue(routingContext.getBodyAsString(),
+				Supplier.class);
+		supplierService.saveSupplier(supplier);
+		routingContext.response()
+			.setStatusCode(201)
+			.putHeader("content-type", "application/json; charset=utf-8")
+			.end(Json.encodePrettily(supplier));
 	}
 
 
